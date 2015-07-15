@@ -8,5 +8,20 @@
 
 import Foundation
 
-println("Hello, World!")
+let args = Process.arguments
 
+if (args.count != 3) {
+    println("usage: review2csv <app ID> <max results>")
+    exit(1)
+}
+
+if let maxPages = args[2].toInt() {
+
+    let appID = args[1]
+
+    let reviews = Loader().loadReviews(appID, maxResults: UInt(maxPages))
+    
+    for review in reviews {
+        println(review)
+    }
+}
